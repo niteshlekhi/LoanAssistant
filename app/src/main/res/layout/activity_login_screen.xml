@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/margin_20_dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginScreen">
+
+    <!-- Email Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_20_dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/loginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/margin_20_dp"
+            android:textColor="@android:color/white" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Password Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_20_dp">
+
+        <EditText
+            android:id="@+id/loginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/margin_20_dp"
+            android:textColor="@android:color/white" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20_dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="@dimen/margin_0_dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="@string/login_as"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_20_sp"
+            android:textStyle="bold" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/spLogin"
+            android:layout_width="@dimen/margin_0_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20_dp"
+            android:layout_marginLeft="@dimen/margin_20_dp"
+            android:layout_weight="0.6"
+            app:ms_arrow_tint="@color/colorPrimaryDark"
+            app:ms_background_color="@android:color/white"
+            app:ms_text_color="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20_dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:padding="@dimen/margin_15_dp"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_16_sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/forgotPwd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_24_dp"
+        android:gravity="center"
+        android:text="@string/forgot_password"
+        android:textSize="@dimen/text_16_sp"
+        android:visibility="gone" />
+
+</LinearLayout>

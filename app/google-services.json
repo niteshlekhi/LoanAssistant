@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1013626020085",
+    "firebase_url": "https://loanassistant-e7d68.firebaseio.com",
+    "project_id": "loanassistant-e7d68",
+    "storage_bucket": "loanassistant-e7d68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013626020085:android:5ac9f10a7466ad8e",
+        "android_client_info": {
+          "package_name": "com.android.loanassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013626020085-2ja7f78114j6rvlugp7adbhi784lf75j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.loanassistant",
+            "certificate_hash": "f3e5d9263609b5b81c80b64e3c75afa10814a241"
+          }
+        },
+        {
+          "client_id": "1013626020085-knjl23cmh5qcdc3ekdjmpijcoig75tt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyCZDzfru8FxcDQDuxIFFEkQTPcFbsnK4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013626020085-knjl23cmh5qcdc3ekdjmpijcoig75tt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

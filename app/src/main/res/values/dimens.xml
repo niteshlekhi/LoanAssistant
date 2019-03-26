@@ -1,0 +1,31 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">15dp</dimen>
+    <dimen name="nav_header_height">120dp</dimen>
+    <dimen name="margin_5_dp">5dp</dimen>
+    <dimen name="margin_10_dp">10dp</dimen>
+    <dimen name="margin_0_dp">0dp</dimen>
+    <dimen name="weight_half">0.5</dimen>
+    <dimen name="weight_four">0.4</dimen>
+    <dimen name="weight_six">0.6</dimen>
+    <dimen name="text_18_sp">18sp</dimen>
+    <dimen name="text_24_sp">24sp</dimen>
+    <dimen name="text_20_sp">20sp</dimen>
+    <dimen name="text_16_sp">16sp</dimen>
+    <dimen name="margin_20_dp">20dp</dimen>
+    <dimen name="text_14_sp">14sp</dimen>
+    <dimen name="margin_90_dp">90dp</dimen>
+    <dimen name="margin_216_dp">216dp</dimen>
+    <dimen name="margin_6_dp">6dp</dimen>
+    <dimen name="margin_40_dp">40dp</dimen>
+    <dimen name="text_22_sp">22sp</dimen>
+    <dimen name="margin_15_dp">15dp</dimen>
+    <dimen name="margin_30_dp">30dp</dimen>
+    <dimen name="weight_two">0.2</dimen>
+    <dimen name="weight_quarter">0.25</dimen>
+    <dimen name="margin_3_dp">3dp</dimen>
+    <dimen name="margin_4_dp">4dp</dimen>
+    <dimen name="margin_9_dp">9dp</dimen>
+    <dimen name="margin_128_dp">128dp</dimen>
+    <dimen name="margin_24_dp">24dp</dimen>
+</resources>

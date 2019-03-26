@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_home"
+            android:icon="@drawable/ic_home_black"
+            android:title="@string/dashboard" />
+        <!--<item
+            android:id="@+id/add_machine"
+            android:icon="@drawable/ic_add"
+            android:title="@string/add_rem_machine" />
+        <item
+            android:id="@+id/remove_machine"
+            android:icon="@drawable/ic_remove"
+            android:title="@string/remove_machine" />-->
+
+        <item
+            android:id="@+id/add_remove_machine"
+            android:icon="@drawable/ic_add"
+            android:title="@string/add_record" />
+
+        <item
+            android:id="@+id/list_mobile"
+            android:icon="@drawable/mobile"
+            android:title="@string/track_collector" />
+    </group>
+
+    <!--<item
+        android:title="@string/reports"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/summary_dept"
+                    android:title="@string/dept_wise_summary" />
+                <item
+                    android:id="@+id/non_working_mach"
+                    android:title="@string/non_working_mach" />
+                <item
+                    android:id="@+id/report_mach"
+                    android:title="@string/report_mach" />
+                &lt;!&ndash; <item
+                     android:id="@+id/report_dept"
+                     android:title="@string/report_dept" />
+                 <item
+                     android:id="@+id/mach_date"
+                     android:title="@string/mach_date_report" />&ndash;&gt;
+
+            </group>
+        </menu>
+    </item>-->
+
+</menu>
