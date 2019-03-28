@@ -5,8 +5,6 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="login">Login</string>
     <string name="login_as">Login as  </string>
-    <string name="administrator">Administrator</string>
-    <string name="collector">Collector</string>
     <string name="dashboard">Dashboard</string>
     <string name="add_record">Add Loan Record</string>
     <string name="track_collector">Track Location</string>
@@ -18,4 +16,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invalid_login">\"Invalid login details!\"</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="description">Toggle Password</string>
+    <string name="exit_dialog">Do you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="title_activity_admin_panel">AdminPanel</string>
+    <string name="loan">Loan</string>
+    <string name="assistant">Assistant</string>
 </resources>

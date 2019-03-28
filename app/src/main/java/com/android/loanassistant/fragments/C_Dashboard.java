@@ -8,22 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.loanassistant.R;
-import com.android.loanassistant.helper.Constants;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class AdminDashboard extends Fragment {
+public class C_Dashboard extends Fragment {
 
-    public AdminDashboard() {
+    public C_Dashboard() {
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle(Constants.DASHBOARD);
-        return inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_c_dashboard, container, false);
     }
-
 
 }

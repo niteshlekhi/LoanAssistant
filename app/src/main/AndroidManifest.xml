@@ -21,7 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminPanel"></activity>
+        <activity
+            android:name=".AdminPanel"
+            android:label="@string/title_activity_admin_panel"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CollectorPanel"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

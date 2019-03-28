@@ -28,4 +28,7 @@
     <dimen name="margin_9_dp">9dp</dimen>
     <dimen name="margin_128_dp">128dp</dimen>
     <dimen name="margin_24_dp">24dp</dimen>
+    <dimen name="text_26_sp">26sp</dimen>
+    <dimen name="text_30_sp">30sp</dimen>
+    <dimen name="text_25_sp">25sp</dimen>
 </resources>
