@@ -2,17 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <!-- <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_home_white"
-        android:title="@string/home"
-        app:showAsAction="always" />-->
+    <!-- <item
+         android:id="@+id/home"
+         android:icon="@drawable/ic_home_white"
+         android:title="@string/home"
+         app:showAsAction="always" />-->
 
     <item
-        android:id="@+id/refresh"
-        android:visible="false"
-        android:icon="@drawable/ic_refresh_button"
-        android:title="@string/refresh"
+        android:id="@+id/notifications"
+        android:icon="@drawable/notification"
+        android:title="@string/notifications"
         app:showAsAction="always" />
 
     <item

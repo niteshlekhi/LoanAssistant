@@ -6,52 +6,48 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_home"
+            android:id="@+id/a_dashboard"
             android:icon="@drawable/ic_home_black"
             android:title="@string/dashboard" />
-        <!--<item
-            android:id="@+id/add_machine"
-            android:icon="@drawable/ic_add"
-            android:title="@string/add_rem_machine" />
-        <item
-            android:id="@+id/remove_machine"
-            android:icon="@drawable/ic_remove"
-            android:title="@string/remove_machine" />-->
-
-        <item
-            android:id="@+id/add_remove_machine"
-            android:icon="@drawable/ic_add"
-            android:title="@string/add_record" />
-
-        <item
-            android:id="@+id/list_mobile"
-            android:icon="@drawable/mobile"
-            android:title="@string/track_collector" />
     </group>
 
-    <!--<item
-        android:title="@string/reports"
+    <item
+        android:title="@string/collector"
         app:showAsAction="always">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/summary_dept"
-                    android:title="@string/dept_wise_summary" />
+                    android:id="@+id/details"
+                    android:icon="@drawable/ic_details"
+                    android:title="@string/details" />
                 <item
-                    android:id="@+id/non_working_mach"
-                    android:title="@string/non_working_mach" />
-                <item
-                    android:id="@+id/report_mach"
-                    android:title="@string/report_mach" />
-                &lt;!&ndash; <item
-                     android:id="@+id/report_dept"
-                     android:title="@string/report_dept" />
-                 <item
-                     android:id="@+id/mach_date"
-                     android:title="@string/mach_date_report" />&ndash;&gt;
+                    android:id="@+id/add_collector"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/add_collector" />
+
+                <!--<item
+                    android:id="@+id/track"
+                    android:title="@string/track_collector" />-->
 
             </group>
         </menu>
-    </item>-->
+    </item>
+
+    <item
+        android:title="@string/customer"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/cust_details"
+                    android:icon="@drawable/ic_details"
+                    android:title="@string/cust_details" />
+                <item
+                    android:id="@+id/add_record"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/add_record" />
+            </group>
+        </menu>
+    </item>
 
 </menu>

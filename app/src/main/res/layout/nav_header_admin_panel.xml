@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:orientation="vertical"
-    android:background="@android:color/white"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/custom_bg"
+    android:paddingTop="@dimen/margin_20_dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
@@ -16,7 +16,7 @@
         android:fontFamily="@font/billabong"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/text_25_sp"
+        android:textSize="@dimen/text_30_sp"
         android:textStyle="bold" />
 
     <TextView
@@ -28,8 +28,15 @@
         android:fontFamily="@font/billabong"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/text_25_sp"
+        android:textSize="@dimen/text_30_sp"
         android:textStyle="bold" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="@dimen/margin_5_dp"
+        android:layout_marginRight="@dimen/margin_5_dp"
+        android:layout_height="@dimen/margin_6_dp"
+        android:background="@android:color/black" />
 
     <!-- <ImageView
          android:id="@+id/imageView"

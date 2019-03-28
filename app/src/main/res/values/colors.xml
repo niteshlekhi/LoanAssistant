@@ -8,4 +8,6 @@
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="colorAccent">#e53935</color>
+    <color name="yellow">#fcf37b</color>
+    <color name="blue">#96fff3</color>
 </resources>

@@ -17,18 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.loanassistant.helper.Constants;
 import com.android.loanassistant.helper.CustomProgressDialog;
 import com.android.loanassistant.model.Login;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -36,6 +32,11 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.android.loanassistant.helper.Constants.PREF_EMAIL;
+import static com.android.loanassistant.helper.Constants.SIGN_IN;
+import static com.android.loanassistant.helper.Constants.type_admin;
+import static com.android.loanassistant.helper.Constants.type_c;
 
 public class LoginScreen extends AppCompatActivity {
     @BindView(R.id.spLogin)
@@ -56,19 +57,17 @@ public class LoginScreen extends AppCompatActivity {
     private Map<String, ?> keys;
     private ArrayAdapter<String> adapter;
     private CustomProgressDialog dialog;
-    boolean validLogin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_login_screen);
         init();
 
-        Intent intent = new Intent(this, AdminPanel.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    /*    Intent intent = new Intent(this, CollectorPanel.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+        finish();*/
 
         keys = prefs.getAll();
         if (!keys.isEmpty()) {
@@ -97,13 +96,13 @@ public class LoginScreen extends AppCompatActivity {
         ButterKnife.bind(this);
         firestore = FirebaseFirestore.getInstance();
         ref = firestore.collection("login");
-        prefs = getApplicationContext().getSharedPreferences(Constants.PREF_EMAIL, MODE_PRIVATE);
+        prefs = getApplicationContext().getSharedPreferences(PREF_EMAIL, MODE_PRIVATE);
         editor = prefs.edit();
         dialog = new CustomProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
         txtEmail.requestFocus();
-        spinner.setItems(Constants.administrator, Constants.collector);
+        /*spinner.setItems(Constants.administrator, Constants.collector);
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
@@ -112,13 +111,12 @@ public class LoginScreen extends AppCompatActivity {
                 else if (position == 1)
                     loginType = 'c';
             }
-        });
+        });*/
     }
 
     private void login(final View v) {
-        validLogin = true;
         if (validate()) {
-            dialog.showDialog(Constants.SIGN_IN);
+            dialog.showDialog(SIGN_IN);
             final String email = txtEmail.getText().toString();
             final String password = txtPassword.getText().toString();
             if (prefs.getAll().containsValue(email)) {
@@ -133,27 +131,26 @@ public class LoginScreen extends AppCompatActivity {
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                     if (queryDocumentSnapshots.size() == 1) {
                         Login model = queryDocumentSnapshots.getDocuments().get(0).toObject(Login.class);
-                        if (model.getPassword().equals(password) && model.getType() == 0) {
+
+                        //Admin
+                        if (model.getPassword().equals(password) && model.getType() == type_admin) {
                             dialog.stopDialog();
 //                            Toast.makeText(LoginScreen.this, "Admin successful", Toast.LENGTH_SHORT).show();
                             final Intent intent = new Intent(LoginScreen.this, AdminPanel.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                        } else if (model.getPassword().equals(Constants.default_pwd) && model.getType() == 1) {
+                        }
+                        //Collector
+                        else if (model.getPassword().equals(password) && model.getType() == type_c) {
                             dialog.stopDialog();
                             dialog.hideKeyboard(v);
 //                            Toast.makeText(LoginScreen.this, "Collector successful", Toast.LENGTH_SHORT).show();
                             final Intent intent = new Intent(LoginScreen.this, CollectorPanel.class);
-                            intent.putExtra("resetPwd", 1);
+                            /*intent.putExtra("resetPwd", password);
+                            intent.putExtra("email", email);*/
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                        } else if (model.getPassword().equals(password) && model.getType() == 1) {
-                            dialog.stopDialog();
-                            dialog.hideKeyboard(v);
-//                            Toast.makeText(LoginScreen.this, "Collector successful", Toast.LENGTH_SHORT).show();
-                            final Intent intent = new Intent(LoginScreen.this, CollectorPanel.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+//                            finish();
                         } else {
                             dialog.stopDialog();
                             dialog.hideKeyboard(v);
@@ -172,25 +169,9 @@ public class LoginScreen extends AppCompatActivity {
                 }
             });
 
-
         } else {
             Toast.makeText(this, "Check the fields again", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void collectorLogin(String email) {
-        final Intent intent = new Intent(LoginScreen.this, CollectorPanel.class);
-        Query query = ref.whereEqualTo("email", email).whereEqualTo("password", Constants.default_pwd);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                intent.putExtra("resetPwd", 1);
-                Toast.makeText(LoginScreen.this, "Collector successful", Toast.LENGTH_SHORT).show();
-            }
-        });
-//        dialog.hideKeyboard(getWindow().getDecorView().getRootView());
-        /* intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);*/
     }
 
     public boolean validate() {
