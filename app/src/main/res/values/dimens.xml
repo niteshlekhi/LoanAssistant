@@ -34,4 +34,6 @@
     <dimen name="card_element_margin">8dp</dimen>
     <dimen name="text_50_sp">50sp</dimen>
     <dimen name="weight_three">0.3</dimen>
+    <dimen name="margin_8_dp">8dp</dimen>
+    <item name="weight_eight" type="dimen" format="float">0.8</item>
 </resources>

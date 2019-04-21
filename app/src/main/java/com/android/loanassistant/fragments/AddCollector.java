@@ -53,6 +53,7 @@ public class AddCollector extends Fragment {
         getActivity().setTitle(Constants.ADD_COLLECTOR);
         dialog = new CustomProgressDialog(getActivity());
         ButterKnife.bind(this, view);
+        setRetainInstance(true);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

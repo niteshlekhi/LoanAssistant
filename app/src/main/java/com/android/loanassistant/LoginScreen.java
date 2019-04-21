@@ -18,14 +18,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.loanassistant.helper.CustomProgressDialog;
-import com.android.loanassistant.model.Login;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.Map;
@@ -35,8 +35,6 @@ import butterknife.ButterKnife;
 
 import static com.android.loanassistant.helper.Constants.PREF_EMAIL;
 import static com.android.loanassistant.helper.Constants.SIGN_IN;
-import static com.android.loanassistant.helper.Constants.type_admin;
-import static com.android.loanassistant.helper.Constants.type_c;
 
 public class LoginScreen extends AppCompatActivity {
     @BindView(R.id.spLogin)
@@ -52,6 +50,7 @@ public class LoginScreen extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private FirebaseFirestore firestore;
     private CollectionReference ref;
+    private DocumentReference docRef;
     private FirebaseAuth mAuth;
     private char loginType = 'a';
     private Map<String, ?> keys;
@@ -95,7 +94,7 @@ public class LoginScreen extends AppCompatActivity {
     private void init() {
         ButterKnife.bind(this);
         firestore = FirebaseFirestore.getInstance();
-        ref = firestore.collection("login");
+        ref = firestore.collection("collector");
         prefs = getApplicationContext().getSharedPreferences(PREF_EMAIL, MODE_PRIVATE);
         editor = prefs.edit();
         dialog = new CustomProgressDialog(this);
@@ -125,7 +124,37 @@ public class LoginScreen extends AppCompatActivity {
                 editor.apply();
             }
 
-            ref.whereEqualTo("email", email)
+
+            mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    dialog.stopDialog();
+                    dialog.hideKeyboard(v);
+                    if (isAdmin(email)) {
+                        Toast.makeText(LoginScreen.this, "Admin successful", Toast.LENGTH_SHORT).show();
+                        /*final Intent intent = new Intent(LoginScreen.this, AdminPanel.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);*/
+                    } else {
+                        Toast.makeText(LoginScreen.this, "Collector successful", Toast.LENGTH_SHORT).show();
+                        /*final Intent intent = new Intent(LoginScreen.this, CollectorPanel.class);
+                        intent.putExtra("resetPwd", password);
+                        intent.putExtra("email", email);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);*/
+//                            finish();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    dialog.stopDialog();
+                    dialog.hideKeyboard(v);
+                    Toast.makeText(LoginScreen.this, "Invalid login details", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            /*ref.whereEqualTo("email", email)
                     .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -146,8 +175,8 @@ public class LoginScreen extends AppCompatActivity {
                             dialog.hideKeyboard(v);
 //                            Toast.makeText(LoginScreen.this, "Collector successful", Toast.LENGTH_SHORT).show();
                             final Intent intent = new Intent(LoginScreen.this, CollectorPanel.class);
-                            /*intent.putExtra("resetPwd", password);
-                            intent.putExtra("email", email);*/
+                            intent.putExtra("resetPwd", password);
+                            intent.putExtra("email", email);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 //                            finish();
@@ -167,11 +196,29 @@ public class LoginScreen extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(LoginScreen.this, "Invalid Email address", Toast.LENGTH_SHORT).show();
                 }
-            });
+            });*/
 
         } else {
             Toast.makeText(this, "Check the fields again", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean isAdmin(String email) {
+        final boolean[] checkAdmin = {true};
+
+        if (ref.document(email)
+                .get().isSuccessful())
+            checkAdmin[0] = false;
+
+                /*.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists())
+                    checkAdmin[0] = false;
+            }
+        });*/
+
+        return checkAdmin[0];
     }
 
     public boolean validate() {
@@ -206,9 +253,8 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-
-//        updateUI(user);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
     @Override
@@ -261,7 +307,7 @@ public class LoginScreen extends AppCompatActivity {
         return true;
     }
 
-    /*private void updateUI(FirebaseUser currentUser) {
+    private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
             Intent intent = new Intent(this, AdminPanel.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -269,5 +315,6 @@ public class LoginScreen extends AppCompatActivity {
             finish();
         } else {
         }
-    }*/
+    }
+
 }

@@ -66,8 +66,8 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout_admin:
-                /*mAuth.signOut();
-                user = null;*/
+                user = null;
+                mAuth.signOut();
                 Intent intent = new Intent(AdminPanel.this, LoginScreen.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

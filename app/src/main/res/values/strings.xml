@@ -28,13 +28,13 @@
     <string name="loan">Loan</string>
     <string name="assistant">Assistant</string>
     <string name="collector">Collector</string>
-    <string name="details">Details</string>
+    <string name="details">Add Employee Details</string>
     <string name="add_collector">Add Employee Details</string>
     <string name="customer">Customer</string>
     <string name="name">Name</string>
     <string name="hint_name">Enter Name</string>
     <string name="hint_email">Enter Email</string>
-    <string name="hint_phone">Enter Phone</string>
+    <string name="hint_phone">Enter Phone Number</string>
     <string name="aadhar">Aadhar Number</string>
     <string name="hint_aadhar">Enter Aadhar Number</string>
     <string name="add">ADD</string>
@@ -48,4 +48,8 @@
     <string name="mobile">Mobile</string>
     <string name="hint_password">Password (pass123)</string>
     <string name="notifications">Notifications</string>
+    <string name="next">Next</string>
+    <string name="new_employee">Add New Employee</string>
+    <string name="address">Address</string>
+    <string name="hint_address">Enter Address</string>
 </resources>

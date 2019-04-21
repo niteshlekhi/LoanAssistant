@@ -23,10 +23,10 @@ public class AddRecord extends Fragment {
     EditText txtPhone;
     @BindView(R.id.custAadhar)
     EditText txtAadhar;
-    @BindView(R.id.amount)
+   /* @BindView(R.id.amount)
     EditText txtAmount;
     @BindView(R.id.interestRate)
-    EditText txtinterest;
+    EditText txtinterest;*/
     @BindView(R.id.btnAddRecord)
     Button btnAdd;
 
@@ -35,7 +35,6 @@ public class AddRecord extends Fragment {
     public AddRecord() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +46,8 @@ public class AddRecord extends Fragment {
         ButterKnife.bind(this, view);
         dialog = new CustomProgressDialog(getActivity());
 
+        setRetainInstance(true);
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,8 +56,8 @@ public class AddRecord extends Fragment {
                     String name = txtName.getText().toString();
                     String phone = txtPhone.getText().toString();
                     String aadhar = txtAadhar.getText().toString();
-                    float amount = Float.parseFloat(txtAmount.getText().toString());
-                    float rate = Float.parseFloat(txtinterest.getText().toString());
+//                    float amount = Float.parseFloat(txtAmount.getText().toString());
+//                    float rate = Float.parseFloat(txtinterest.getText().toString());
 
 //                    Collector collector = new Collector(name, email, phone, aadhar);
 //                    CollectionReference ref = FirebaseFirestore.getInstance().collection("collector");
