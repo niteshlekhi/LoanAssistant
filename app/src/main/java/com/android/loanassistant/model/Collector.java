@@ -1,10 +1,14 @@
 package com.android.loanassistant.model;
 
-public class Collector {
+import java.io.Serializable;
+
+public class Collector implements Serializable {
     private String name;
     private String email;
     private String phone;
     private String aadhar;
+    private String address;
+    private String dpUrl;
 
     public Collector() {
     }
@@ -14,6 +18,15 @@ public class Collector {
         this.email = email;
         this.phone = phone;
         this.aadhar = aadhar;
+    }
+
+    public Collector(String name, String email, String phone, String aadhar, String address, String dpUrl) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.aadhar = aadhar;
+        this.address = address;
+        this.dpUrl = dpUrl;
     }
 
     public String getName() {
@@ -46,5 +59,21 @@ public class Collector {
 
     public void setAadhar(String aadhar) {
         this.aadhar = aadhar;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDpUrl() {
+        return dpUrl;
+    }
+
+    public void setDpUrl(String dpUrl) {
+        this.dpUrl = dpUrl;
     }
 }

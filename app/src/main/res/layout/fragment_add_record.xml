@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/margin_10_dp"
-    android:background="@android:color/white"
-    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/margin_20_dp"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".fragments.AddRecord">
 
     <LinearLayout
@@ -29,101 +30,20 @@
             android:textStyle="bold"
             android:text="@string/add_record" />
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_15_dp"
-            android:background="@drawable/bg_edittext"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_margin="@dimen/margin_12_dp"
+            android:background="@drawable/bg_edittext">
 
-            <ImageView
-                android:layout_width="@dimen/margin_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_two"
-                android:contentDescription="@string/name"
-                android:gravity="center"
-                android:src="@drawable/person" />
-
-            <EditText
-                android:id="@+id/custName"
-                android:layout_width="@dimen/margin_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_eight"
-                android:gravity="start"
-                android:hint="@string/hint_name"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords"
-                android:maxLength="10"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_15_dp"
-            android:background="@drawable/bg_edittext"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <ImageView
-                android:layout_width="@dimen/margin_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_two"
-                android:contentDescription="@string/email"
-                android:gravity="center"
-                android:src="@drawable/email" />
-
-            <EditText
-                android:id="@+id/custEmail"
-                android:layout_width="@dimen/margin_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_eight"
-                android:gravity="start"
-                android:hint="@string/hint_email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_15_dp"
-            android:background="@drawable/bg_edittext"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <ImageView
-                android:layout_width="@dimen/margin_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_two"
-                android:contentDescription="@string/phone"
-                android:gravity="center"
-                android:src="@drawable/phone" />
-
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/custPhone"
-                android:layout_width="@dimen/margin_0_dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_eight"
-                android:gravity="start"
+                android:drawableLeft="@drawable/phone"
+                android:drawablePadding="@dimen/margin_12_dp"
+                android:drawableStart="@drawable/phone"
                 android:hint="@string/hint_phone"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
@@ -131,34 +51,69 @@
                 android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
-        </LinearLayout>
 
-        <LinearLayout
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_15_dp"
-            android:background="@drawable/bg_edittext"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <ImageView
-                android:layout_width="@dimen/margin_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_5_dp"
-                android:layout_weight="@dimen/weight_two"
-                android:contentDescription="@string/aadhar"
-                android:gravity="center"
-                android:src="@drawable/aadhar1" />
+            android:layout_margin="@dimen/margin_12_dp"
+            android:background="@drawable/bg_edittext">
 
             <EditText
-                android:id="@+id/custAadhar"
-                android:layout_width="@dimen/margin_0_dp"
+                android:id="@+id/custName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5_dp"
                 android:layout_weight="@dimen/weight_eight"
-                android:gravity="start"
+                android:drawableLeft="@drawable/person"
+                android:drawablePadding="@dimen/margin_15_dp"
+                android:drawableStart="@drawable/person"
+                android:hint="@string/hint_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:maxLength="10"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_12_dp"
+            android:background="@drawable/bg_edittext">
+
+            <EditText
+                android:id="@+id/custEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="@dimen/margin_15_dp"
+                android:drawableStart="@drawable/email"
+                android:hint="@string/hint_email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10_dp"
+            android:background="@drawable/bg_edittext">
+
+
+            <EditText
+                android:id="@+id/custAadhar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/aadhar"
+                android:drawablePadding="@dimen/margin_15_dp"
+                android:drawableStart="@drawable/aadhar"
                 android:hint="@string/hint_aadhar"
                 android:imeOptions="actionDone"
                 android:inputType="phone"
@@ -166,18 +121,21 @@
                 android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/btnAddRecord"
+            android:id="@+id/btnNextPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_15_dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_20_dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:gravity="center"
-            android:text="@string/add"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:padding="@dimen/margin_15_dp"
+            android:text="@string/next"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_18_sp"
+            android:textSize="@dimen/text_20_sp"
             android:textStyle="bold" />
 
     </LinearLayout>

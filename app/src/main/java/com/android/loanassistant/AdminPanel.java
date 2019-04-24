@@ -18,14 +18,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.loanassistant.fragments.AddCollector;
+import com.android.loanassistant.fragments.AddCollector2;
 import com.android.loanassistant.fragments.CollectorDetails;
+import com.android.loanassistant.interfaces.CallBackInterface;
+import com.android.loanassistant.model.Collector;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdminPanel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AdminPanel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CallBackInterface {
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
@@ -37,12 +40,15 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     private FragmentTransaction transaction;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private AddCollector collector;
+    private AddCollector2 collector2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
         initViews();
+
     }
 
     @Override
@@ -99,7 +105,11 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         manager = getSupportFragmentManager();
-        transaction = manager.beginTransaction().add(R.id.frameLayout, new AddCollector());
+        collector = new AddCollector();
+        collector.setCallBack(this);
+        collector2 = new AddCollector2();
+        collector2.setCallBack(this);
+        transaction = manager.beginTransaction().add(R.id.frameLayout, collector);
         transaction.commit();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -123,7 +133,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
 
         switch (id) {
             case R.id.add_collector:
-                transaction = manager.beginTransaction().replace(R.id.frameLayout, new AddCollector());
+                transaction = manager.beginTransaction().replace(R.id.frameLayout, collector);
                 transaction.commit();
                 break;
             case R.id.details:
@@ -135,5 +145,30 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onNextFragment(Collector model) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("objSave", model);
+        manager = getSupportFragmentManager();
+        collector2.setArguments(bundle);
+        transaction = manager.beginTransaction().add(R.id.frameLayout, collector2).addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onPreviousFragment(String address) {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void onNextFragRecord(Collector model) {
+
+    }
+
+    @Override
+    public void onPreviousFragRecord(String address) {
+
     }
 }

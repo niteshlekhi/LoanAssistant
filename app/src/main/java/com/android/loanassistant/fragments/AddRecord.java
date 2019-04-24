@@ -23,11 +23,7 @@ public class AddRecord extends Fragment {
     EditText txtPhone;
     @BindView(R.id.custAadhar)
     EditText txtAadhar;
-   /* @BindView(R.id.amount)
-    EditText txtAmount;
-    @BindView(R.id.interestRate)
-    EditText txtinterest;*/
-    @BindView(R.id.btnAddRecord)
+    @BindView(R.id.btnNextPage)
     Button btnAdd;
 
     private CustomProgressDialog dialog;

@@ -52,4 +52,8 @@
     <string name="new_employee">Add New Employee</string>
     <string name="address">Address</string>
     <string name="hint_address">Enter Address</string>
+    <string name="upload_dp">Upload Profile Picture</string>
+    <string name="new_employee2">Other Details</string>
+    <string name="back">BACK</string>
+    <string name="img_preview">Image Preview</string>
 </resources>

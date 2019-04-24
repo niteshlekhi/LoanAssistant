@@ -2,24 +2,19 @@ package com.android.loanassistant.fragments;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.loanassistant.R;
 import com.android.loanassistant.helper.Constants;
-import com.android.loanassistant.helper.CustomProgressDialog;
+import com.android.loanassistant.interfaces.CallBackInterface;
 import com.android.loanassistant.model.Collector;
-import com.android.loanassistant.model.Login;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,14 +28,15 @@ public class AddCollector extends Fragment {
     EditText txtEmail;
 
     @BindView(R.id.ctrPhone)
-    EditText txtPhone;
+    AutoCompleteTextView txtPhone;
 
     @BindView(R.id.ctrAadhar)
     EditText txtAadhar;
 
-    @BindView(R.id.btnAddCollector)
-    Button btnAdd;
-    private CustomProgressDialog dialog;
+    @BindView(R.id.btnNextPage)
+    Button btnNext;
+
+    private CallBackInterface callBackInterface;
 
     public AddCollector() {
     }
@@ -51,16 +47,28 @@ public class AddCollector extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_collector, container, false);
         getActivity().setTitle(Constants.ADD_COLLECTOR);
-        dialog = new CustomProgressDialog(getActivity());
         ButterKnife.bind(this, view);
-        setRetainInstance(true);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        if ((savedInstanceState != null) && (savedInstanceState.getSerializable("objCollector") != null)) {
+            Collector collector = (Collector) savedInstanceState
+                    .getSerializable("objCollector");
+        }
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validate()) {
-                    dialog.showDialog(Constants.ADDING);
                     String name = txtName.getText().toString();
+                    String email = txtEmail.getText().toString();
+                    String phone = txtPhone.getText().toString();
+                    String aadhar = txtAadhar.getText().toString();
+                    Collector collector = new Collector(name, email, phone, aadhar);
+
+                    if (callBackInterface != null)
+                        callBackInterface.onNextFragment(collector);
+
+                    /*dialog.showDialog(Constants.ADDING);
+                    String name = txtAddress.getText().toString();
                     final String email = txtEmail.getText().toString();
                     String phone = txtPhone.getText().toString();
                     String aadhar = txtAadhar.getText().toString();
@@ -74,7 +82,7 @@ public class AddCollector extends Fragment {
                             ref1.document(email).set(new Login(email, Constants.default_pwd, Constants.type_c));
                             dialog.stopDialog();
                             Toast.makeText(getActivity(), "Collector Added!", Toast.LENGTH_SHORT).show();
-                            clearData();
+//                            clearData();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -82,7 +90,7 @@ public class AddCollector extends Fragment {
                             dialog.stopDialog();
                             Toast.makeText(getActivity(), "Collector NOT Added!", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -90,16 +98,29 @@ public class AddCollector extends Fragment {
         return view;
     }
 
+    public void setCallBack(CallBackInterface callBackInterface) {
+        this.callBackInterface = callBackInterface;
+    }
+
     private boolean validate() {
         boolean valid = true;
+        String name = txtName.getText().toString();
         String email = txtEmail.getText().toString();
         String phone = txtPhone.getText().toString();
         String aadhar = txtAadhar.getText().toString();
 
-        if (email.isEmpty() || email.isEmpty() || phone.isEmpty() || aadhar.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || aadhar.isEmpty()) {
             Toast.makeText(getActivity(), "Please fill all fields ", Toast.LENGTH_LONG).show();
             valid = false;
         } else {
+            //Name
+            if (name.length() < 3) {
+                txtName.setError("Invalid Name!");
+                txtName.requestFocus();
+                valid = false;
+            } else {
+                txtName.setError(null);
+            }
             //Email
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 txtEmail.setError("Enter a valid Email address!");
@@ -128,6 +149,17 @@ public class AddCollector extends Fragment {
 
         return valid;
     }
+
+    /*@Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Collector collector = new Collector();
+        collector.setName(txtName.getText().toString());
+        collector.setEmail(txtEmail.getText().toString());
+        collector.setPhone(txtPhone.getText().toString());
+        collector.setAadhar(txtAadhar.getText().toString());
+        outState.putSerializable("objCollector", collector);
+    }*/
 
     private void clearData() {
         txtName.setText("");
