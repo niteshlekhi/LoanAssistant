@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialogPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="Phone Number: "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialogAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:gravity="center"
+        android:text="Amount: "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30_dp"
+        android:gravity="center"
+        android:text="Select employee to appoint for amount collection"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/dialogCollector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5_dp"
+        android:padding="@dimen/margin_15_dp"
+        android:prompt="@string/select_employee"
+        android:textAlignment="center"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btnAppoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20_dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:padding="@dimen/margin_15_dp"
+        android:text="@string/appoint"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_20_sp"
+        android:textStyle="bold" />
+    o
+</LinearLayout>

@@ -23,12 +23,12 @@
             android:layout_marginBottom="@dimen/margin_20_dp"
             android:layout_marginTop="@dimen/margin_20_dp"
             android:gravity="center"
+            android:text="@string/add_record"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/secondaryDarkColor"
             android:textSize="@dimen/text_20_sp"
-            android:textStyle="bold"
-            android:text="@string/add_record" />
+            android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -72,7 +72,51 @@
                 android:hint="@string/hint_name"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords"
-                android:maxLength="10"
+                android:maxLength="40"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10_dp"
+            android:background="@drawable/bg_edittext">
+
+            <EditText
+                android:id="@+id/custAadhar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/aadhar"
+                android:drawablePadding="@dimen/margin_15_dp"
+                android:drawableStart="@drawable/aadhar"
+                android:hint="@string/hint_aadhar"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="12"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10_dp"
+            android:background="@drawable/bg_edittext">
+
+            <EditText
+                android:id="@+id/custAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:drawableLeft="@drawable/ic_address"
+                android:drawablePadding="@dimen/margin_15_dp"
+                android:drawableStart="@drawable/ic_address"
+                android:hint="@string/hint_address"
+                android:imeOptions="actionNext"
+                android:inputType="textMultiLine"
+                android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
@@ -84,56 +128,121 @@
             android:background="@drawable/bg_edittext">
 
             <EditText
-                android:id="@+id/custEmail"
+                android:id="@+id/loanAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5_dp"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="@dimen/margin_15_dp"
-                android:drawableStart="@drawable/email"
-                android:hint="@string/hint_email"
+                android:hint="@string/hint_amount"
                 android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/black" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_10_dp"
+            android:layout_margin="@dimen/margin_12_dp"
             android:background="@drawable/bg_edittext">
 
-
             <EditText
-                android:id="@+id/custAadhar"
+                android:id="@+id/interestRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/aadhar"
-                android:drawablePadding="@dimen/margin_15_dp"
-                android:drawableStart="@drawable/aadhar"
-                android:hint="@string/hint_aadhar"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:hint="@string/hint_rate"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"
+            android:text="Enter time duration (in Months)"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_12_dp"
+            android:padding="@dimen/margin_5_dp"
+            android:background="@drawable/bg_edittext"
+            android:textAlignment="center">
+
+            <EditText
+                android:id="@+id/duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:hint="@string/hint_duration"
                 android:imeOptions="actionDone"
-                android:inputType="phone"
-                android:maxLength="12"
+                android:inputType="number"
+                android:maxLength="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/black" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"
+            android:text="Select Installment mode"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spInstallments"
+            android:layout_width="match_parent"
+            android:padding="@dimen/margin_15_dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"></Spinner>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10_dp"
+            android:visibility="gone"
+            android:background="@drawable/bg_edittext">
+
+            <EditText
+                android:id="@+id/loanInstallment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_installment"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="2"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/btnNextPage"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnAddRecord"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/margin_20_dp"
+            android:layout_margin="@dimen/margin_20_dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:gravity="center"
-            android:layout_marginTop="@dimen/margin_20_dp"
             android:padding="@dimen/margin_15_dp"
-            android:text="@string/next"
+            android:text="@string/add"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_20_sp"
             android:textStyle="bold" />

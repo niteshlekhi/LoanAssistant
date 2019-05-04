@@ -6,7 +6,7 @@
     <string name="login">Login</string>
     <string name="login_as">Login as  </string>
     <string name="dashboard">Dashboard</string>
-    <string name="add_record">Add Loan Record</string>
+    <string name="add_record">New Loan Application</string>
     <string name="track_collector">Track</string>
     <string name="menu">MENU</string>
     <string name="action_settings">Settings</string>
@@ -28,8 +28,8 @@
     <string name="loan">Loan</string>
     <string name="assistant">Assistant</string>
     <string name="collector">Collector</string>
-    <string name="details">Add Employee Details</string>
-    <string name="add_collector">Add Employee Details</string>
+    <string name="details">Employee Details</string>
+    <string name="add_collector">Add New Employee</string>
     <string name="customer">Customer</string>
     <string name="name">Name</string>
     <string name="hint_name">Enter Name</string>
@@ -41,8 +41,8 @@
     <string name="phone">Phone</string>
     <string name="cust_details">Customer Details</string>
     <string name="amount">Amount</string>
-    <string name="hint_amount">Enter Amount</string>
-    <string name="hint_rate">Interest Rate</string>
+    <string name="hint_amount">Enter Loan Amount</string>
+    <string name="hint_rate">Interest Rate (%)</string>
     <string name="time">Time</string>
     <string name="collector_details">Employee Details</string>
     <string name="mobile">Mobile</string>
@@ -56,4 +56,38 @@
     <string name="new_employee2">Other Details</string>
     <string name="back">BACK</string>
     <string name="img_preview">Image Preview</string>
+    <string name="admin_success">Admin successful</string>
+    <string name="collector_success">Collector successful</string>
+    <string name="hint_duration">Time Duration</string>
+    <string name="hint_installment">Enter Loan Installments</string>
+    <string name="profile">Profile</string>
+    <string name="change_pwd">Change Password</string>
+
+    <!--Tracker text-->
+    <string name="notification_text">Tracking, tap to cancel</string>
+    <string name="transport_id" translatable="false">123</string>
+    <string name="firebase_path" translatable="false">locations</string>
+    <string name="firebase_email" translatable="false">niteshlekhi@gmail.com</string>
+    <string name="firebase_password" translatable="false">qwerty</string>
+    <string name="title_activity_transport">Map</string>
+    <string name="review">Review</string>
+    <string name="customer_details">User Details</string>
+    <string name="pending">Pending Payments</string>
+    <string name="initial_date">Initial Date</string>
+    <string name="due_date">Due Date: </string>
+    <string name="rate">Interest rate: </string>
+    <string name="installments">Installments: </string>
+    <string name="done">Done</string>
+    <string name="appoint">Appoint</string>
+
+    <!-- String Placeholders -->
+    <string name="style_phone">Phone: %s</string>
+    <string name="style_amount">Amount: %s</string>
+    <string name="style_interest">Interest: %s</string>
+    <string name="style_time">Time: %d</string>
+    <string name="style_init_date">Loan Date: %s</string>
+    <string name="style_due_date">Due Date: %s</string>\
+    <string name="style_installments">Installments: %s</string>
+    <string name="select_employee">---Select Employee Name---</string>
+    <string name="total_entries">Total entries:</string>
 </resources>

@@ -1,8 +1,10 @@
 package com.android.loanassistant;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,17 +15,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.loanassistant.fragments.C_Dashboard;
+import com.android.loanassistant.fragments.CollectorDetails;
 import com.android.loanassistant.helper.Constants;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,10 +61,10 @@ public class CollectorPanel extends AppCompatActivity implements NavigationView.
         /*Intent rcvIntent = getIntent();
         String pwd=rcvIntent.getStringExtra("resetPwd");
         if (pwd.equals(Constants.default_pwd))
-            changePwd(rcvIntent.getStringExtra("email"));*/
+            changePwd(rcvIntent.getStringExtra("email"),pwd);*/
     }
 
-    private void changePwd(final String email) {
+    private void changePwd(final String email,String pwd) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
@@ -61,20 +72,41 @@ public class CollectorPanel extends AppCompatActivity implements NavigationView.
 
         final EditText txtPwd = dialogView.findViewById(R.id.chngPwd);
 
-        dialogBuilder.setTitle("Change Password");
-        dialogBuilder.setMessage("Enter new Password between 4 to 10 characters");
+        dialogBuilder.setTitle("Change Password \n");
+        dialogBuilder.setMessage("Enter new Password from 4 to 10 characters");
         dialogBuilder.setCancelable(false);
         dialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, int whichButton) {
                 String pwd = txtPwd.getText().toString().trim();
                 if (validate(txtPwd, pwd)) {
-                    DocumentReference ref = FirebaseFirestore.getInstance().collection("login").document(email);
+                    //
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential(email,pwd);
+
+// Prompt the user to re-provide their sign-in credentials
+                    user.reauthenticate(credential)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        //updatePassword
+                                    } else {
+                                        // Password is incorrect
+                                    }
+                                }
+                            });
+
+                    //
+
+                    /*DocumentReference ref = FirebaseFirestore.getInstance().collection("login").document(email);
                     ref.update("password", pwd).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             dialog.dismiss();
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -179,6 +211,30 @@ public class CollectorPanel extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        manager = getSupportFragmentManager();
+
+        /*switch (id) {
+            case R.id.add_collector:
+                transaction = manager.beginTransaction().replace(R.id.frameLayout, collector);
+                transaction.commit();
+                break;
+            case R.id.details:
+                transaction = manager.beginTransaction().replace(R.id.frameLayout, new CollectorDetails());
+                transaction.commit();
+                break;
+        }*/
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 }

@@ -5,11 +5,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +28,11 @@ import com.android.loanassistant.helper.CustomProgressDialog;
 import com.android.loanassistant.interfaces.CallBackInterface;
 import com.android.loanassistant.model.Collector;
 import com.android.loanassistant.model.Login;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,25 +52,22 @@ public class AddCollector2 extends Fragment {
 
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int PERMISSION_REQUEST_CODE = 200;
+
     @BindView(R.id.ctrAddress)
     EditText txtAddress;
-
-    @BindView(R.id.ctrDp)
-    ImageView imgDp;
-
     @BindView(R.id.ctrDpPreview)
     ImageView imgDpPreview;
-
+    @BindView(R.id.ctrDp)
+    ImageView imgDp;
     @BindView(R.id.btnPrevPage)
     Button btnPrevPage;
-
     @BindView(R.id.btnAddCollector)
     Button btnAdd;
 
     private CallBackInterface callBackInterface;
-
     private CustomProgressDialog dialog;
     private Bitmap bitmap;
+    private String dpUrl = "";
 
     public AddCollector2() {
     }
@@ -104,9 +107,9 @@ public class AddCollector2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (validate()) {
-//                    dialog.showDialog(Constants.ADDING);
+                    dialog.showDialog(Constants.ADDING);
 
-                    String dpUrl = uploadImage();
+                    uploadImage();
 
                     Bundle bundle = new Bundle();
                     if (getArguments() != null)
@@ -124,38 +127,17 @@ public class AddCollector2 extends Fragment {
                         public void onSuccess(Void aVoid) {
                             ref1.document(email).set(new Login(email, Constants.default_pwd, Constants.type_c));
                             dialog.stopDialog();
-                            Toast.makeText(getActivity(), "Collector Added!", Toast.LENGTH_SHORT).show();
-//                            clearData();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            dialog.stopDialog();
-                            Toast.makeText(getActivity(), "Collector NOT Added!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    Toast.makeText(getActivity(), "Collector Added!", Toast.LENGTH_SHORT).show();
-
-                    /*final Collector collector = new Collector(name, email, phone, aadhar);
-                    CollectionReference ref = FirebaseFirestore.getInstance().collection("collector");
-                    final CollectionReference ref1 = FirebaseFirestore.getInstance().collection("login");
-
-                    ref.document(email).set(collector).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ref1.document(email).set(new Login(email, Constants.default_pwd, Constants.type_c));
-                            dialog.stopDialog();
-                            Toast.makeText(getActivity(), "Collector Added!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Record Added!", Toast.LENGTH_SHORT).show();
                             clearData();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             dialog.stopDialog();
-                            Toast.makeText(getActivity(), "Collector NOT Added!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Record NOT Added!", Toast.LENGTH_SHORT).show();
                         }
-                    });*/
+                    });
+
                 }
             }
         });
@@ -163,11 +145,14 @@ public class AddCollector2 extends Fragment {
         return view;
     }
 
-    private String uploadImage() {
+    private void uploadImage() {
 //        dialog.showDialog("Uploading Data...");
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://loanassistant-e7d68.appspot.com/");
-        final StorageReference ref = storageRef.child("images/" + UUID.randomUUID().toString());
+        StorageReference storageRef = storage.getReferenceFromUrl(Constants.FIRESTORE_URL);
+        UUID randomId=UUID.randomUUID();
+        final StorageReference ref = storageRef.child("images/" + randomId.toString());
+
+        dpUrl=Constants.FIRESTORE_URL+"images/"+randomId.toString();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
@@ -182,7 +167,6 @@ public class AddCollector2 extends Fragment {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -193,37 +177,28 @@ public class AddCollector2 extends Fragment {
             }
         });
 
-        /*ref.putFile(filePath)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        dialog.stopDialog();
-                        Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
-                        filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Log.d("demo", "onSuccess: uri= "+ uri.toString());
-                            }
-                        });
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        dialog.stopDialog();
-                        Toast.makeText(getContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                .getTotalByteCount());
-                        dialog.showDialog("Uploaded "+(int)progress+"%");
-                    }
-                });*/
+        /*Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
 
-        return String.valueOf(ref.getDownloadUrl());
+                // Continue with the task to get the download URL
+                dpUrl = String.valueOf(ref.getDownloadUrl());
+                return ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });*/
     }
 
     private void captureImage() {
@@ -294,11 +269,14 @@ public class AddCollector2 extends Fragment {
         }
     }
 
-    /* private void clearData() {
+    private void clearData() {
         txtAddress.setText("");
-        txtEmail.setText("");
-        txtPhone.setText("");
-        txtAadhar.setText("");
-    }*/
+        imgDpPreview.setImageDrawable(null);
+        imgDp.setImageDrawable(null);
+        bitmap = null;
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, new AddCollector());
+        ft.commit();
+    }
 
 }

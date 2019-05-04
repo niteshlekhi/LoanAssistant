@@ -2,6 +2,7 @@ package com.android.loanassistant.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class AddCollector extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_collector, container, false);
@@ -66,31 +67,6 @@ public class AddCollector extends Fragment {
 
                     if (callBackInterface != null)
                         callBackInterface.onNextFragment(collector);
-
-                    /*dialog.showDialog(Constants.ADDING);
-                    String name = txtAddress.getText().toString();
-                    final String email = txtEmail.getText().toString();
-                    String phone = txtPhone.getText().toString();
-                    String aadhar = txtAadhar.getText().toString();
-                    final Collector collector = new Collector(name, email, phone, aadhar);
-                    CollectionReference ref = FirebaseFirestore.getInstance().collection("collector");
-                    final CollectionReference ref1 = FirebaseFirestore.getInstance().collection("login");
-
-                    ref.document(email).set(collector).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ref1.document(email).set(new Login(email, Constants.default_pwd, Constants.type_c));
-                            dialog.stopDialog();
-                            Toast.makeText(getActivity(), "Collector Added!", Toast.LENGTH_SHORT).show();
-//                            clearData();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            dialog.stopDialog();
-                            Toast.makeText(getActivity(), "Collector NOT Added!", Toast.LENGTH_SHORT).show();
-                        }
-                    });*/
                 }
             }
         });
@@ -150,7 +126,7 @@ public class AddCollector extends Fragment {
         return valid;
     }
 
-    /*@Override
+/*    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         Collector collector = new Collector();
@@ -160,12 +136,5 @@ public class AddCollector extends Fragment {
         collector.setAadhar(txtAadhar.getText().toString());
         outState.putSerializable("objCollector", collector);
     }*/
-
-    private void clearData() {
-        txtName.setText("");
-        txtEmail.setText("");
-        txtPhone.setText("");
-        txtAadhar.setText("");
-    }
 
 }

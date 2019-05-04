@@ -2,13 +2,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_list"
+    android:layout_margin="@dimen/margin_10_dp"
     tools:context=".fragments.AdminDashboard">
 
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_20_dp"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="@string/pending"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/secondaryDarkColor"
+        android:textSize="@dimen/text_20_sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/totalCount"
+        android:text="@string/total_entries"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:background="@drawable/custom_list">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="@dimen/margin_0_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:layout_weight="@dimen/weight_half"
+                android:gravity="center"
+                android:text="@string/name"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/text_18_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="@dimen/margin_0_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:layout_weight="@dimen/weight_half"
+                android:gravity="center"
+                android:text="@string/mobile"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/text_18_sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"
+            android:text="@string/aadhar"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/text_18_sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"
+            android:text="@string/address"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/text_18_sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvPending"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/dashboard" />
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_20_dp" />
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.android.loanassistant.interfaces;
 
 import com.android.loanassistant.model.Collector;
+import com.android.loanassistant.model.Loan;
+import com.android.loanassistant.model.User;
 
 public interface CallBackInterface {
 
@@ -8,7 +10,7 @@ public interface CallBackInterface {
 
     public void onPreviousFragment(String address);
 
-    public void onNextFragRecord(Collector model);
+    public void onNextFragRecord(Loan loan);
 
-    public void onPreviousFragRecord(String address);
+//    public void onPreviousFragRecord(Loan loan);
 }

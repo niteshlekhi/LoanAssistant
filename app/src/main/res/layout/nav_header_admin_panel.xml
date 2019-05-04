@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:orientation="vertical"
-    android:background="@drawable/custom_bg"
     android:paddingTop="@dimen/margin_20_dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -18,6 +17,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/text_30_sp"
         android:textStyle="bold" />
+
 
     <TextView
         android:layout_width="match_parent"
@@ -37,6 +37,7 @@
         android:layout_marginRight="@dimen/margin_5_dp"
         android:layout_height="@dimen/margin_6_dp"
         android:background="@android:color/black" />
+
 
     <!-- <ImageView
          android:id="@+id/imageView"

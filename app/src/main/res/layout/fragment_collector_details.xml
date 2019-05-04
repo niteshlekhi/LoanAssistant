@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_5_dp"
+    android:layout_margin="@dimen/margin_10_dp"
+    android:background="@drawable/custom_list"
+    android:orientation="vertical"
     tools:context=".fragments.CollectorDetails">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_30_dp"
-        android:layout_marginTop="@dimen/margin_30_dp"
-        android:background="@drawable/custom_list"
+        android:layout_marginBottom="@dimen/margin_20_dp"
+        android:layout_marginTop="@dimen/margin_20_dp"
         android:gravity="center"
         android:text="@string/collector_details"
         android:textAllCaps="true"
@@ -24,31 +24,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10_dp"
+        android:layout_margin="@dimen/margin_10_dp"
         android:background="@drawable/custom_list"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="@dimen/margin_0_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:layout_weight="@dimen/weight_half"
+                android:gravity="center"
+                android:text="@string/name"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/text_18_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="@dimen/margin_0_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5_dp"
+                android:layout_weight="@dimen/weight_half"
+                android:gravity="center"
+                android:text="@string/mobile"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/text_18_sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="@dimen/margin_0_dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_5_dp"
-            android:layout_weight="@dimen/weight_half"
             android:gravity="center"
-            android:text="@string/name"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="@dimen/text_18_sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="@dimen/margin_0_dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_5_dp"
-            android:layout_weight="@dimen/weight_half"
-            android:gravity="center"
-            android:text="@string/mobile"
+            android:text="@string/aadhar"
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/text_18_sp"
             android:textStyle="bold" />

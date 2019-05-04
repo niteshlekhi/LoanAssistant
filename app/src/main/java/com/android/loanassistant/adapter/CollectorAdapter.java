@@ -37,8 +37,7 @@ public class CollectorAdapter extends RecyclerView.Adapter<CollectorHolder> {
         View v = inflater.inflate(R.layout.list_collector, parent, false);
         final CollectorHolder collectorHolder = new CollectorHolder(v);
 
-/*
-        collectorHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        /*new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Vibrator vibrator = (Vibrator) v.getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -66,8 +65,7 @@ public class CollectorAdapter extends RecyclerView.Adapter<CollectorHolder> {
                 });
                 return true;
             }
-        });
-*/
+        });*/
         return collectorHolder;
     }
 
@@ -75,6 +73,7 @@ public class CollectorAdapter extends RecyclerView.Adapter<CollectorHolder> {
     public void onBindViewHolder(@NonNull CollectorHolder holder, int position) {
         holder.tvName.setText(dataList.get(position).getName());
         holder.tvPhone.setText(dataList.get(position).getPhone());
+        holder.tvAadhar.setText(dataList.get(position).getAadhar());
     }
 
     @Override

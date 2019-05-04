@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/margin_20_dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".fragments.AddRecord2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_list"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20_dp"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:gravity="center"
+            android:text="@string/review"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="@dimen/text_20_sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/reviewPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:gravity="center"
+            android:text="Phone Number: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8_dp"
+            android:gravity="center"
+            android:text="Loan Amount: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8_dp"
+            android:gravity="center"
+            android:text="Interest Rate(%): "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8_dp"
+            android:gravity="center"
+            android:text="Time (in months): "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewInterest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8_dp"
+            android:gravity="center"
+            android:text="Interest on Amount: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewDeducted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"
+            android:text="Amount deducted as Interest: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8_dp"
+            android:gravity="center"
+            android:text="Start Date: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/reviewDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8_dp"
+            android:gravity="center"
+            android:text="Due Date: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_20_dp"
+                android:layout_marginTop="@dimen/margin_30_dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:padding="@dimen/margin_15_dp"
+                android:text="@string/done"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_20_sp"
+                android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>
