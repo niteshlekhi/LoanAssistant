@@ -7,12 +7,12 @@ import android.widget.TextView;
 import com.android.loanassistant.R;
 
 public class CollectorHolder extends RecyclerView.ViewHolder {
-    public TextView tvName, tvPhone,tvAadhar;
+    public TextView tvName, tvPhone,tvEmail;
 
     public CollectorHolder(View itemView) {
         super(itemView);
         tvName = itemView.findViewById(R.id.lstCtrName);
-        tvPhone = itemView.findViewById(R.id.lstPhone);
-        tvAadhar=itemView.findViewById(R.id.lstAadhar);
+        tvPhone = itemView.findViewById(R.id.lstCtrPhone);
+        tvEmail=itemView.findViewById(R.id.lstCtrEmail);
     }
 }

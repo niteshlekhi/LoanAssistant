@@ -20,15 +20,15 @@ import com.android.loanassistant.helper.CustomProgressDialog;
 import com.android.loanassistant.holder.PendingHolder;
 import com.android.loanassistant.model.Collector;
 import com.android.loanassistant.model.Loan;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
     private List<Loan> dataList;
@@ -72,38 +72,51 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
                 spCollector.setPrompt("---Select Employee Name---");
                 Button btnAppoint = mDialog.findViewById(R.id.btnAppoint);
                 tvPhone.setText(String.format(context.getString(R.string.style_phone), dataList.get(pendingHolder.getAdapterPosition()).getPhone()));
-                tvAmount.append(dataList.get(pendingHolder.getAdapterPosition()).getAmount());
+                tvAmount.setText(String.format(context.getString(R.string.style_amount), dataList.get(pendingHolder.getAdapterPosition()).getAmount()));
 
                 btnAppoint.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final String cName = String.valueOf(spCollector.getSelectedItem());
+                        final String cEmail = cName.substring(cName.indexOf("(") + 1, cName.indexOf(")"));
+                        String phone = tvPhone.getText().toString();
+                        phone = phone.substring(phone.lastIndexOf(":") + 2);
                         //appointCollector();
-                        DocumentReference ref = FirebaseFirestore.getInstance().collection("loans").document(tvPhone.getText().toString());
-                        ref.update("appoint", cName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        CollectionReference ref = FirebaseFirestore.getInstance().collection("loans");
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("appoint", cEmail);
+                      /*  ref.document(phone).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(context, "Collector appointed: " + cName, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Collector appointed: " + cEmail, Toast.LENGTH_SHORT).show();
                                     mDialog.dismiss();
                                 }
                             }
+                        });*/
+                        ref.document(phone).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(context, "Collector appointed: " + cEmail, Toast.LENGTH_SHORT).show();
+                                mDialog.dismiss();
+                            }
                         });
+                        Loan loan = new Loan(cEmail);
+                        ref.document(phone).set(loan, SetOptions.mergeFields("appoint"));
 
 
                     }
                 });
-
             }
         });
 
-        /*new View.OnLongClickListener() {
+       /* new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Vibrator vibrator = (Vibrator) v.getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(50);
 
-                final String mobile = mobileHolder.tvMobile.getText().toString();
+                final String phone = pendingHolder.tvPhone.getText().toString();
 
                 PopupMenu menu = new PopupMenu(context, v);
                 MenuInflater inflater = menu.getMenuInflater();
@@ -115,7 +128,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.deleteMach:
-                                callback.removeItem(mobile);
+                                callback.removeItem(phone);
                                 return true;
 
                             default:
@@ -125,7 +138,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
                 });
                 return true;
             }
-        });*/
+        };*/
 
       /*  pendingHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,9 +154,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
         return pendingHolder;
     }
 
-    private void appointCollector() {
-    }
-
     private void addCollectors(final ArrayAdapter adapter) {
         final CustomProgressDialog dialog = new CustomProgressDialog(context);
         CollectionReference ref = FirebaseFirestore.getInstance().collection("collector");
@@ -153,7 +163,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<Collector> list = queryDocumentSnapshots.toObjects(Collector.class);
                 for (Collector collector : list) {
-                    adapter.add(collector.getName());
+                    adapter.add(collector.getName() + " (" + collector.getEmail() + ")");
                 }
                 dialog.stopDialog();
             }
@@ -177,5 +187,4 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingHolder> {
     public int getItemCount() {
         return this.dataList.size();
     }
-
 }

@@ -46,7 +46,7 @@
             android:name=".CollectorPanel"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".PaymentActivity" />
 
         <receiver
             android:name=".helper.CheckConnectivity"
@@ -59,7 +59,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="PjETvTbKDbkwxQYbM7lfKqQS" />
+            android:value="rzp_test_sR4FMqnXevanMn" /> <!-- PjETvTbKDbkwxQYbM7lfKqQS" /> -->
 
         <service
             android:name=".TrackerService"
@@ -68,7 +68,7 @@
 
         <receiver
             android:name=".NetworkChangeReceiver"
-            android:label="NetworkChangeReceiver" >
+            android:label="NetworkChangeReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
@@ -89,7 +89,13 @@
 
         <activity
             android:name=".fragments.TransportActivity"
-            android:label="@string/title_activity_transport"></activity>
+            android:label="@string/title_activity_transport" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
+        <activity
+            android:name=".Maps2Activity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

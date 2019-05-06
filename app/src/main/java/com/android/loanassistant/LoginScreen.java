@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -175,7 +176,7 @@ public class LoginScreen extends AppCompatActivity {
     private boolean isAdmin(final String email) {
         checkAdmin = true;
 
-        /*ref.document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        ref.document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -186,7 +187,7 @@ public class LoginScreen extends AppCompatActivity {
                     }
                 }
             }
-        });*/
+        });
 
         for (String s : list) {
             if (s.equals(email)) {
@@ -233,7 +234,33 @@ public class LoginScreen extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+//        updateUI(currentUser);
+        checkInternet();
+    }
+
+    private int checkInternet() {
+        int status=-1;
+           /* Intent intent = new Intent();
+            intent.setAction("CheckConnectivity"); sendBroadcast(intent);*/
+        if (NetworkUtil.getConnectivityStatus(this) == 0) {
+            status=0;
+            android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(LoginScreen.this)
+                    .setTitle("Network Error").setMessage(R.string.no_network)
+                    .setIcon(getResources().getDrawable(R.mipmap.ic_launcher))
+                    .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            checkInternet();
+                            finish();
+                        }
+                    }).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            dialog1.dismiss();
+                        }
+                    }).show();
+        }
+        return status;
     }
 
     @Override
@@ -303,6 +330,4 @@ public class LoginScreen extends AppCompatActivity {
         } else {
         }
     }
-
-
 }

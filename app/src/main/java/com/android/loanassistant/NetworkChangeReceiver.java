@@ -3,15 +3,41 @@ package com.android.loanassistant;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
 
+    public static ConnectivityReceiverListener connectivityReceiverListener;
+
+    public NetworkChangeReceiver() {
+        super();
+    }
+
     @Override
-    public void onReceive(final Context context, final Intent intent) {
+    public void onReceive(Context context, Intent arg1) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
 
-        String status = NetworkUtil.getConnectivityStatusString(context);
+        if (connectivityReceiverListener != null) {
+            connectivityReceiverListener.onNetworkConnectionChanged(isConnected);
+        }
+    }
 
-        Toast.makeText(context, status, Toast.LENGTH_LONG).show();
+/*    public static boolean isConnected() {
+        ConnectivityManager
+                cm = (ConnectivityManager) LoginScreen.getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
+    }*/
+
+
+    public interface ConnectivityReceiverListener {
+        void onNetworkConnectionChanged(boolean isConnected);
     }
 }

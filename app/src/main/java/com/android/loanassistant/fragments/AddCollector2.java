@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -121,6 +124,7 @@ public class AddCollector2 extends Fragment {
                     CollectionReference ref = FirebaseFirestore.getInstance().collection("collector");
                     final CollectionReference ref1 = FirebaseFirestore.getInstance().collection("login");
                     final String email = collector.getEmail();
+                    final String pwd=collector.getPassword();
 
                     ref.document(email).set(collector).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -128,6 +132,13 @@ public class AddCollector2 extends Fragment {
                             ref1.document(email).set(new Login(email, Constants.default_pwd, Constants.type_c));
                             dialog.stopDialog();
                             Toast.makeText(getActivity(), "Record Added!", Toast.LENGTH_SHORT).show();
+                            FirebaseAuth auth=FirebaseAuth.getInstance();
+                            auth.createUserWithEmailAndPassword(email,pwd).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    Log.i("auth","Auth created");
+                                }
+                            });
                             clearData();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -150,7 +161,7 @@ public class AddCollector2 extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl(Constants.FIRESTORE_URL);
         UUID randomId=UUID.randomUUID();
-        final StorageReference ref = storageRef.child("images/" + randomId.toString());
+        final StorageReference ref = storageRef.child("images/" + randomId.toString()+".jpg");
 
         dpUrl=Constants.FIRESTORE_URL+"images/"+randomId.toString();
 

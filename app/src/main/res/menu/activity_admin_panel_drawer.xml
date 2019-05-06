@@ -25,10 +25,10 @@
                     android:icon="@drawable/ic_add"
                     android:title="@string/add_collector" />
 
-                <item
+                <!--<item
                     android:id="@+id/track_collector"
                     android:icon="@drawable/ic_tracker"
-                    android:title="@string/track_collector" />
+                    android:title="@string/track_collector" />-->
 
             </group>
         </menu>

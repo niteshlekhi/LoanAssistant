@@ -46,7 +46,7 @@
     <string name="time">Time</string>
     <string name="collector_details">Employee Details</string>
     <string name="mobile">Mobile</string>
-    <string name="hint_password">Password (pass123)</string>
+    <string name="hint_password">Enter Password</string>
     <string name="notifications">Notifications</string>
     <string name="next">Next</string>
     <string name="new_employee">Add New Employee</string>
@@ -79,15 +79,34 @@
     <string name="installments">Installments: </string>
     <string name="done">Done</string>
     <string name="appoint">Appoint</string>
+    <string name="Rs">\u20B9</string>
 
     <!-- String Placeholders -->
+    <string name="style_name">Name: %s</string>
+    <string name="style_address">Address: %s</string>
     <string name="style_phone">Phone: %s</string>
-    <string name="style_amount">Amount: %s</string>
+    <string name="style_email">Email: %s</string>
+    <string name="style_aadhar">Aadhar: %s</string>
+    <string name="style_amount">Amount: \u20B9 %s</string>
     <string name="style_interest">Interest: %s</string>
-    <string name="style_time">Time: %d</string>
+    <string name="style_rate">Rate: %s %%</string>
+    <string name="style_time">Time: %d mo</string>
     <string name="style_init_date">Loan Date: %s</string>
     <string name="style_due_date">Due Date: %s</string>\
     <string name="style_installments">Installments: %s</string>
     <string name="select_employee">---Select Employee Name---</string>
-    <string name="total_entries">Total entries:</string>
+    <string name="total_entries">Total entries:  </string>
+    <string name="no_network">No Internet connection found!!</string>
+    <string name="retry">Retry</string>
+    <string name="appointed">Appointed Payment Collections</string>
+    <string name="location">Locate User</string>
+    <string name="pmt_mode">Select Payment Mode</string>
+    <string name="detailss">Details</string>
+    <string name="pay">Pay Amount</string>
+    <string name="finish">Finish</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="delete">Delete</string>
+    <string name="delete_item">Delete Item?</string>
+    <string name="paid_amt">Enter Amount to be paid</string>
+    <string name="count">Count</string>
 </resources>

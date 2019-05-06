@@ -128,7 +128,7 @@ public class AddRecord extends Fragment {
 
                             //Loan data store
                             CollectionReference loanRef = firestore.collection("loans");
-                            final Loan loan = new Loan(String.format("%.2f", amount), String.format("%.2f", rate), time, String.format("%.2f", interest), startDate, dueDate, phone, dates);
+                            final Loan loan = new Loan(String.format("%.2f", amount), String.format("%.2f", rate), time, String.format("%.2f", interest), startDate, dueDate, phone, dates,"","");
                             loanRef.document(phone).set(loan).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -171,7 +171,7 @@ public class AddRecord extends Fragment {
 
     private boolean validate() {
         boolean valid = true;
-        /*String name = txtName.getText().toString();
+        String name = txtName.getText().toString();
         String address = txtAddress.getText().toString();
         String phone = txtPhone.getText().toString();
         String aadhar = txtAadhar.getText().toString();
@@ -207,7 +207,7 @@ public class AddRecord extends Fragment {
             } else {
                 txtAadhar.setError(null);
             }
-        }*/
+        }
 
         return valid;
     }

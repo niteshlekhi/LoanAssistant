@@ -57,7 +57,11 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
+
+//        Intent intent=new Intent(this,CollectorPanel.class);startActivity(intent);
+
         initViews();
+        checkInternet();
 
     }
 
@@ -76,6 +80,28 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_admin, menu);
         return true;
+    }
+
+    private void checkInternet() {
+           /* Intent intent = new Intent();
+            intent.setAction("CheckConnectivity"); sendBroadcast(intent);*/
+        if (NetworkUtil.getConnectivityStatus(this) == 0) {
+            android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(AdminPanel.this)
+                    .setTitle("Network Error").setMessage(R.string.no_network)
+                    .setIcon(getResources().getDrawable(R.mipmap.ic_launcher))
+                    .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            checkInternet();
+                            finish();
+                        }
+                    }).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            dialog1.dismiss();
+                        }
+                    }).show();
+        }
     }
 
     @Override
@@ -159,8 +185,8 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
                 transaction = manager.beginTransaction().replace(R.id.frameLayout, record);
                 transaction.commit();
                 break;
-            case R.id.track_collector:
-                /*transaction = manager.beginTransaction().replace(R.id.frameLayout, new TrackerActivity());
+            /*case R.id.track_collector:
+                transaction = manager.beginTransaction().replace(R.id.frameLayout, new TrackerActivity());
                 transaction.commit();*/
             case R.id.cust_details:
                 transaction = manager.beginTransaction().replace(R.id.frameLayout, new CustomerDetails());

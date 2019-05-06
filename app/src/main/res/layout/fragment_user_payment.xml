@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/margin_20_dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".fragments.UserPayment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_list"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10_dp"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center"
+            android:text="@string/detailss"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="@dimen/text_20_sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/dialog2Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:gravity="center"
+            android:text="@string/name"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dialog2Phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center"
+            android:text="@string/phone"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dialog2Amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center"
+            android:text="@string/amount"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dialog2Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center"
+            android:text="@string/address"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!--        <TextView
+                    android:id="@+id/lst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_30_dp"
+                    android:gravity="center"
+                    android:text="Select employee to appoint for amount collection"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/dialogCollector"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5_dp"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_15_dp"
+                    android:prompt="@string/select_employee"
+                    android:textAlignment="center" />-->
+
+        <Button
+            android:id="@+id/btnLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20_dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="@dimen/margin_15_dp"
+            android:text="@string/location"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_20_sp"
+            android:textStyle="bold" />
+
+        <!--Google Map-->
+
+        <Spinner
+            android:id="@+id/dialogPmtMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5_dp"
+            android:gravity="center"
+            android:padding="@dimen/margin_15_dp"
+            android:prompt="@string/pmt_mode"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20_dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="@dimen/margin_15_dp"
+            android:text="@string/pay"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_20_sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

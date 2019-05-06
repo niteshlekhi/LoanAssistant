@@ -1,5 +1,7 @@
 package com.android.loanassistant.model;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class Collector implements Serializable {
@@ -9,6 +11,7 @@ public class Collector implements Serializable {
     private String aadhar;
     private String address;
     private String dpUrl;
+    private String password;
 
     public Collector() {
     }
@@ -20,10 +23,28 @@ public class Collector implements Serializable {
         this.aadhar = aadhar;
     }
 
+    public Collector(String name, String email, String phone, String password, String aadhar) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.aadhar = aadhar;
+    }
+
     public Collector(String name, String email, String phone, String aadhar, String address, String dpUrl) {
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.aadhar = aadhar;
+        this.address = address;
+        this.dpUrl = dpUrl;
+    }
+
+    public Collector(String name, String email, String phone, String password, String aadhar, String address, String dpUrl) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
         this.aadhar = aadhar;
         this.address = address;
         this.dpUrl = dpUrl;
@@ -75,5 +96,10 @@ public class Collector implements Serializable {
 
     public void setDpUrl(String dpUrl) {
         this.dpUrl = dpUrl;
+    }
+
+    @Exclude
+    public String getPassword() {
+        return password;
     }
 }

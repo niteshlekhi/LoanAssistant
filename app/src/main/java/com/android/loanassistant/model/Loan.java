@@ -12,9 +12,14 @@ public class Loan implements Serializable {
     public String dueDate;
     public String interest;
     public List<String> dates;
+    public String appoint;
+    public String paid;
 
-    //    public String dates1;
     public Loan() {
+    }
+
+    public Loan(String appoint) {
+        this.appoint = appoint;
     }
 
     public Loan(String phone, String amount, String rate, int time, String startDate, String dueDate, String interest, List<String> dates) {
@@ -37,6 +42,19 @@ public class Loan implements Serializable {
         this.dueDate = dueDate;
         this.phone = phone;
         this.dates = dates;
+    }
+
+    public Loan(String amount, String rate, int time, String interest, String startDate, String dueDate, String phone, List<String> dates, String appoint, String paid) {
+        this.amount = amount;
+        this.rate = rate;
+        this.time = time;
+        this.interest = interest;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+        this.phone = phone;
+        this.dates = dates;
+        this.appoint = appoint;
+        this.paid = paid;
     }
 
     public Loan(String amount, String rate, int time) {
@@ -108,6 +126,15 @@ public class Loan implements Serializable {
 //    public int getDatesCount(){
 //        return dates.size();
 //    }
+
+
+    public String getAppoint() {
+        return appoint;
+    }
+
+    public void setAppoint(String appoint) {
+        this.appoint = appoint;
+    }
 
     public void setDates(List<String> dates) {
         this.dates = dates;

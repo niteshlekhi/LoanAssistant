@@ -19,7 +19,7 @@
             android:title="@string/remove_machine" />-->
     </group>
 
-    <item
+   <!-- <item
         android:title="@string/profile"
         app:showAsAction="always">
         <menu>
@@ -30,7 +30,7 @@
                     android:title="@string/change_pwd" />
             </group>
         </menu>
-    </item>
+    </item>-->
 
 
     <!--<item

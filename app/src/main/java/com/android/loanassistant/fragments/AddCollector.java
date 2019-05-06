@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.loanassistant.R;
 import com.android.loanassistant.helper.Constants;
+import com.android.loanassistant.helper.CustomProgressDialog;
 import com.android.loanassistant.interfaces.CallBackInterface;
 import com.android.loanassistant.model.Collector;
 
@@ -31,6 +32,9 @@ public class AddCollector extends Fragment {
     @BindView(R.id.ctrPhone)
     AutoCompleteTextView txtPhone;
 
+    @BindView(R.id.ctrPassword)
+    EditText txtPassword;
+
     @BindView(R.id.ctrAadhar)
     EditText txtAadhar;
 
@@ -38,6 +42,7 @@ public class AddCollector extends Fragment {
     Button btnNext;
 
     private CallBackInterface callBackInterface;
+    private View view;
 
     public AddCollector() {
     }
@@ -46,7 +51,7 @@ public class AddCollector extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_collector, container, false);
+        view = inflater.inflate(R.layout.fragment_add_collector, container, false);
         getActivity().setTitle(Constants.ADD_COLLECTOR);
         ButterKnife.bind(this, view);
 
@@ -63,7 +68,7 @@ public class AddCollector extends Fragment {
                     String email = txtEmail.getText().toString();
                     String phone = txtPhone.getText().toString();
                     String aadhar = txtAadhar.getText().toString();
-                    Collector collector = new Collector(name, email, phone, aadhar);
+                    Collector collector = new Collector(name, email, phone, txtPassword.getText().toString(), aadhar);
 
                     if (callBackInterface != null)
                         callBackInterface.onNextFragment(collector);
@@ -83,9 +88,10 @@ public class AddCollector extends Fragment {
         String name = txtName.getText().toString();
         String email = txtEmail.getText().toString();
         String phone = txtPhone.getText().toString();
+        String password=txtPassword.getText().toString();
         String aadhar = txtAadhar.getText().toString();
 
-        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || aadhar.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() ||password.isEmpty()|| aadhar.isEmpty()) {
             Toast.makeText(getActivity(), "Please fill all fields ", Toast.LENGTH_LONG).show();
             valid = false;
         } else {
@@ -113,6 +119,14 @@ public class AddCollector extends Fragment {
             } else {
                 txtPhone.setError(null);
             }
+            //Password
+            if (password.length() < 4 || password.length() > 10) {
+                txtPassword.setError("Between 4 and 10 characters");
+                txtPassword.requestFocus();
+                valid = false;
+            } else {
+                txtPassword.setError(null);
+            }
             //Aadhar
             if (aadhar.length() < 12) {
                 txtAadhar.setError("Invalid Aadhar");
@@ -126,7 +140,13 @@ public class AddCollector extends Fragment {
         return valid;
     }
 
-/*    @Override
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        new CustomProgressDialog(getActivity()).hideKeyboard(view);
+    }
+
+    /*    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         Collector collector = new Collector();
