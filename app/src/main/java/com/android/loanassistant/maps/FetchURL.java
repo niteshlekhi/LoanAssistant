@@ -1,4 +1,4 @@
-package com.android.loanassistant;
+package com.android.loanassistant.maps;
 
 import android.content.Context;
 import android.os.AsyncTask;

@@ -15,4 +15,5 @@ public class CollectorHolder extends RecyclerView.ViewHolder {
         tvPhone = itemView.findViewById(R.id.lstCtrPhone);
         tvEmail=itemView.findViewById(R.id.lstCtrEmail);
     }
+
 }

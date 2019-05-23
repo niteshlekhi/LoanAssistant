@@ -1,4 +1,4 @@
-package com.android.loanassistant;
+package com.android.loanassistant.maps;
 
 import com.google.android.gms.maps.model.LatLng;
 

@@ -26,7 +26,7 @@ import com.android.loanassistant.fragments.AddRecord2;
 import com.android.loanassistant.fragments.AdminDashboard;
 import com.android.loanassistant.fragments.CollectorDetails;
 import com.android.loanassistant.fragments.CustomerDetails;
-import com.android.loanassistant.fragments.TrackerActivity;
+import com.android.loanassistant.helper.NetworkUtil;
 import com.android.loanassistant.interfaces.CallBackInterface;
 import com.android.loanassistant.model.Collector;
 import com.android.loanassistant.model.Loan;

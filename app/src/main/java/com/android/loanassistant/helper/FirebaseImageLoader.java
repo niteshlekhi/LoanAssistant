@@ -1,4 +1,4 @@
-package com.android.loanassistant;
+package com.android.loanassistant.helper;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.android.loanassistant;
+package com.android.loanassistant.helper;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

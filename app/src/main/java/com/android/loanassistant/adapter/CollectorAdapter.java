@@ -36,6 +36,7 @@ public class CollectorAdapter extends RecyclerView.Adapter<CollectorHolder> {
     private AdapterCallback callback;
     private ImageView imgCollector;
     private int position;
+    private static CollectorAdapter.MyClickListener sClickListener;
 
     public CollectorAdapter(Context context, List<Collector> dataList, AdapterCallback callback) {
         this.dataList = dataList;
@@ -154,8 +155,8 @@ public class CollectorAdapter extends RecyclerView.Adapter<CollectorHolder> {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Record Deleted!", Toast.LENGTH_SHORT).show();
+                dataList.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position, getItemCount());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -194,6 +195,10 @@ public class CollectorAdapter extends RecyclerView.Adapter<CollectorHolder> {
     @Override
     public int getItemCount() {
         return this.dataList.size();
+    }
+
+    interface MyClickListener {
+        void onItemClick(int position, View v);
     }
 
 }

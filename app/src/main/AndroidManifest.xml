@@ -67,7 +67,7 @@
             android:exported="true" />
 
         <receiver
-            android:name=".NetworkChangeReceiver"
+            android:name=".helper.NetworkChangeReceiver"
             android:label="NetworkChangeReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -94,7 +94,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
         <activity
-            android:name=".Maps2Activity"
+            android:name=".maps.Maps2Activity"
             android:label="@string/title_activity_maps"></activity>
     </application>
 

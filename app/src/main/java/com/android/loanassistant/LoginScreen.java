@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.loanassistant.helper.CustomProgressDialog;
+import com.android.loanassistant.helper.NetworkUtil;
 import com.android.loanassistant.model.Collector;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

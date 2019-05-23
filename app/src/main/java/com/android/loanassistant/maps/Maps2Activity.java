@@ -1,4 +1,4 @@
-package com.android.loanassistant;
+package com.android.loanassistant.maps;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.loanassistant.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;

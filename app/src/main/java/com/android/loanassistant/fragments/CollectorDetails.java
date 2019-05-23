@@ -34,6 +34,7 @@ public class CollectorDetails extends Fragment {
     private CustomProgressDialog dialog;
     private int count = 0;
     private CollectorAdapter collectorAdapter;
+    private List<Collector> list;
 
     public CollectorDetails() {
         // Required empty public constructor
@@ -54,6 +55,13 @@ public class CollectorDetails extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateData();
+
+    }
+
     private void initViews(View view) {
         getActivity().setTitle(Constants.COLLECTOR_DETAILS);
         dialog = new CustomProgressDialog(getActivity());
@@ -63,13 +71,16 @@ public class CollectorDetails extends Fragment {
         recyclerView = view.findViewById(R.id.rvCollector);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
     }
 
     private void updateData() {
+        if (list != null)
+            list.clear();
         ref.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<Collector> list = queryDocumentSnapshots.toObjects(Collector.class);
+                list = queryDocumentSnapshots.toObjects(Collector.class);
                 count = list.size();
                 collectorAdapter = new CollectorAdapter(getContext(), list);
                 recyclerView.setAdapter(collectorAdapter);

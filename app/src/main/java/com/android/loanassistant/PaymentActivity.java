@@ -1,6 +1,8 @@
 package com.android.loanassistant;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.loanassistant.model.User;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,7 +27,9 @@ import com.razorpay.PaymentResultListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -98,6 +103,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction().replace(R.id.frameLayout2, mapFragment);
                 transaction.commit();*/
+
+                //TODO Convert address to latlng and check for null values
+
+                LatLng latLng = getLatLong(txtAddress.getText().toString());
+//                if(isValidLatLng(latLng.latitude,latLng.longitude)){}
 
                 Intent intent = new Intent(PaymentActivity.this, MapsActivity.class);
                 intent.putExtra("keyAddress", txtAddress.getText().toString());
@@ -179,7 +189,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             Toast.makeText(this, "Enter valid amount", Toast.LENGTH_SHORT).show();
         } else {
             int amt = amount - newAmt;
-            newAmt*=100;
+            newAmt *= 100;
             final Checkout checkout = new Checkout();
 //        amount=amount+100;
             try {
@@ -206,10 +216,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             CollectionReference ref = FirebaseFirestore.getInstance().collection("loans");
             Map<String, Object> map = new HashMap<>();
             map.put("paid", "online");
-            map.put("appoint","");
+            map.put("appoint", "");
             map.put("amount", String.valueOf(amount - newAmt));
 
-            ref.document(phone).set(map, SetOptions.mergeFields("appoint", "paid","amount"))
+            ref.document(phone).set(map, SetOptions.mergeFields("appoint", "paid", "amount"))
 //            ;ref.document(phone).update(map)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -231,6 +241,40 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         } catch (Exception e) {
             Log.e("payment", "Exception in onPaymentError", e);
         }
+    }
+
+    public boolean isValidLatLng(double lat, double lng) {
+        if (lat < -90 || lat > 90) {
+            return false;
+        } else if (lng < -180 || lng > 180) {
+            return false;
+        }
+        return true;
+    }
+
+    private LatLng getLatLong(String strAddress) {
+        Geocoder coder = new Geocoder(this);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            if (address.size() > 0) {
+                Address location = address.get(0);
+                p1 = new LatLng(location.getLatitude(), location.getLongitude());
+            } else
+                Toast.makeText(this, "Address not accurate", Toast.LENGTH_SHORT).show();
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
     }
 
 }
